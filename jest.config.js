@@ -10,6 +10,7 @@ module.exports = {
   clearMocks: true,
   preset: "ts-jest",
   moduleNameMapper: {
+    "^axios$": "axios/dist/node/axios.cjs",
     "@src/(.*)": "<rootDir>/src/$1",
     "@test/(.*)": "<rootDir>/test/$1",
   },
