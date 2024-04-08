@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "yarn build && node dist/src/index.js",
+    "start": "npm run build && node dist/src/index.js",
     "start:local": "ts-node-dev --transpile-only src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src ./test --ext .ts",
@@ -37,7 +37,8 @@
     "body-parser": "^1.19.1",
     "config": "^3.3.11",
     "express": "^4.17.2",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "nock": "^13.5.4"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

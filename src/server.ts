@@ -5,6 +5,8 @@ import bodyParser from "body-parser";
 import { ForecastController } from "./controllers/forecast";
 import * as database from "@src/database";
 import { BeachesController } from "./controllers/beaches";
+import { UsersController } from "./controllers/users";
+
 export class SetupServer extends Server {
   /*
    * same as this.port = port, declaring as private here will
@@ -18,6 +20,7 @@ export class SetupServer extends Server {
    * We use a different method to init instead of using the constructor
    * this way we allow the server to be used in tests and normal initialization
    */
+
   public async init(): Promise<void> {
     this.setupExpress();
     this.setupControllers();
@@ -32,7 +35,12 @@ export class SetupServer extends Server {
   private setupControllers(): void {
     const forecastController = new ForecastController();
     const beachesController = new BeachesController();
-    this.addControllers([forecastController, beachesController]);
+    const usersController = new UsersController();
+    this.addControllers([
+      forecastController,
+      beachesController,
+      usersController,
+    ]);
   }
 
   public getApp(): Application {
@@ -45,5 +53,11 @@ export class SetupServer extends Server {
 
   public async close(): Promise<void> {
     await database.close();
+  }
+
+  public start(): void {
+    this.app.listen(this.port, () => {
+      console.info("Server listening on port: " + this.port);
+    });
   }
 }
